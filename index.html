@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>WORLD MONITOR — AI Security & Monitoring Platform</title>
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%2306b6d4' stroke-width='2'><circle cx='12' cy='12' r='10'/><path d='m4.93 4.93 4.24 4.24'/><path d='m14.83 9.17 4.24-4.24'/><circle cx='12' cy='12' r='4'/></svg>" />
+  <!-- Links to style.css in the same directory -->
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <div class="app-container">
+    <!-- Sidebar Navigation -->
+    <aside class="sidebar" id="sidebar">
+      <div class="sidebar-header">
+        <div class="brand-icon">🛡️</div>
+        <div>
+          <div class="brand-title">WORLD <span>MONITOR</span></div>
+          <div class="brand-sub">AI SECPLATFORM</div>
+        </div>
+      </div>
+
+      <nav class="sidebar-nav">
+        <button class="nav-item active" data-page="dashboard" onclick="window.WM.navigate('dashboard')">
+          <span>🏠</span><span>Dashboard</span>
+        </button>
+        <button class="nav-item" data-page="applications" onclick="window.WM.navigate('applications')">
+          <span>📱</span><span>Applications</span><span class="nav-badge">12</span>
+        </button>
+        <button class="nav-item" data-page="assessments" onclick="window.WM.navigate('assessments')">
+          <span>🔍</span><span>Assessments</span><span class="nav-badge">4</span>
+        </button>
+        <button class="nav-item" data-page="vulnerabilities" onclick="window.WM.navigate('vulnerabilities')">
+          <span>🛡️</span><span>Vulnerabilities</span><span class="nav-badge" style="background:rgba(239,68,68,0.2); color:#ef4444;">18</span>
+        </button>
+        <button class="nav-item" data-page="ai-analyzer" onclick="window.WM.navigate('ai-analyzer')">
+          <span>🤖</span><span>AI Security</span>
+        </button>
+        <button class="nav-item" data-page="live-monitor" onclick="window.WM.navigate('live-monitor')">
+          <span>📡</span><span>Live Monitor</span><span class="nav-badge live">● LIVE</span>
+        </button>
+        <button class="nav-item" data-page="authorization" onclick="window.WM.navigate('authorization')">
+          <span>👥</span><span>Authorization</span>
+        </button>
+        <button class="nav-item" data-page="reports" onclick="window.WM.navigate('reports')">
+          <span>📊</span><span>Reports</span>
+        </button>
+      </nav>
+
+      <div style="padding:16px; border-top:1px solid #1e293b; background:#090d19;">
+        <div style="font-size:11px; font-family:'JetBrains Mono',monospace; color:#10b981; display:flex; align-items:center; gap:6px;">
+          <span class="pulse-dot"></span> SYSTEM ONLINE
+        </div>
+        <div style="font-size:10px; color:#64748b; margin-top:2px;">Safe Assessment Mode</div>
+      </div>
+    </aside>
+
+    <!-- Top Navigation Bar -->
+    <header class="top-navbar">
+      <div class="env-status-badge">
+        <span style="color:#06b6d4; font-weight:700;">AUTHORIZED SECURITY ENVIRONMENT</span>
+        <span style="color:#475569;">|</span>
+        <span style="color:#94a3b8;">AI-Powered Security Monitoring & Assessment Platform</span>
+      </div>
+
+      <div style="display:flex; align-items:center; gap:12px;">
+        <div class="role-switcher-btn" onclick="const r = prompt('Select Role:\n1. Security Administrator\n2. Security Analyst\n3. Viewer', 'Security Administrator'); if(r) window.WM.setRole(r);">
+          <span>👤 Persona:</span>
+          <span id="currentRoleDisplay" style="color:#06b6d4; font-weight:700;">Security Administrator</span>
+          <span style="font-size:10px; color:#64748b;">▼</span>
+        </div>
+      </div>
+    </header>
+
+    <!-- Main Content Area -->
+    <main class="main-wrapper" id="mainWrapper">
+      <div id="mainContentArea"></div>
+
+      <!-- Footer (Section 35) -->
+      <footer style="margin-top:40px; padding:20px 0; border-top:1px solid #1e293b; display:flex; justify-content:space-between; align-items:center; font-size:11px; color:#64748b; flex-wrap:wrap; gap:8px;">
+        <div>World Monitor © 2026 • Authorized Security Assessment Platform</div>
+        <div style="color:#06b6d4; font-family:'JetBrains Mono',monospace;">AI Safe Assessment Mode Enabled</div>
+      </footer>
+    </main>
+  </div>
+
+  <!-- Floating AI Button (Section 12) -->
+  <button class="floating-ai-btn" onclick="window.WM.toggleAIDrawer()">
+    <span>🤖</span>
+    <span>AI Security Assistant</span>
+  </button>
+
+  <!-- Slide-out AI Chat Drawer (Section 12) -->
+  <div class="ai-drawer" id="aiDrawer">
+    <div style="padding:16px 20px; border-bottom:1px solid #1e293b; display:flex; justify-content:space-between; align-items:center; background:#090d19;">
+      <div>
+        <div style="font-size:14px; font-weight:800; color:#fff;">World Monitor AI</div>
+        <div style="font-size:11px; color:#64748b;">Security Analysis Assistant (Safe Mode)</div>
+      </div>
+      <button onclick="window.WM.toggleAIDrawer()" style="background:none; border:none; color:#94a3b8; font-size:20px; cursor:pointer;">&times;</button>
+    </div>
+
+    <div id="aiChatStream" style="flex:1; overflow-y:auto; padding:16px; display:flex; flex-direction:column; gap:12px;">
+      <div style="align-self:flex-start; background:#1e293b; color:#cbd5e1; padding:12px 14px; border-radius:12px 12px 12px 0; font-size:12px; max-width:85%; border:1px solid #334155;">
+        <div style="font-size:10px; color:#06b6d4; font-weight:700; margin-bottom:4px;">WORLD MONITOR AI (Safe Mode)</div>
+        Hello Operator. I can assist with vulnerability analysis, evidence review, and remediation guidance within authorized test boundaries.
+      </div>
+    </div>
+
+    <!-- Quick Prompt Pills -->
+    <div style="padding:8px 12px; background:#090d19; border-top:1px solid #1e293b; display:flex; gap:6px; overflow-x:auto;">
+      <button class="btn btn-secondary" style="font-size:10px; padding:4px 8px; white-space:nowrap;" onclick="window.WM.sendAIMessage('Analyze my latest findings')">Analyze findings</button>
+      <button class="btn btn-secondary" style="font-size:10px; padding:4px 8px; white-space:nowrap;" onclick="window.WM.sendAIMessage('Explain BOLA vulnerability')">Explain BOLA</button>
+      <button class="btn btn-secondary" style="font-size:10px; padding:4px 8px; white-space:nowrap;" onclick="window.WM.sendAIMessage('What evidence should I collect?')">Evidence guide</button>
+    </div>
+
+    <!-- Input -->
+    <div style="padding:12px; border-top:1px solid #1e293b; background:#090d19; display:flex; gap:8px;">
+      <input type="text" id="aiChatInput" placeholder="Ask about vulnerabilities or remediation..." style="flex:1; background:#070b14; border:1px solid #1e293b; border-radius:8px; padding:8px 12px; font-size:12px; color:#fff; outline:none;" onkeydown="if(event.key==='Enter') window.WM.sendAIMessage()" />
+      <button class="btn btn-primary" onclick="window.WM.sendAIMessage()">Send</button>
+    </div>
+  </div>
+
+  <!-- Modal Container -->
+  <div id="modalContainer"></div>
+
+  <!-- Links to app.js in the same directory -->
+  <script src="app.js"></script>
+</body>
+</html>
